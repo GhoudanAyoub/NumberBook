@@ -138,7 +138,7 @@ public class ContactList extends AppCompatActivity {
         findViewById(R.id.FindPhoneButton).setVisibility(View.GONE);
         findViewById(R.id.FindPhoneButton).setOnClickListener(view -> {
             phone = "+" + countryCodePicker.getSelectedCountryCode() + editText.getText().toString();
-            contactViewModel.getContact();
+            contactViewModel.getContactByPhoneNumber(editText.getText().toString());
             contactViewModel.getLiveData().observe(this, contactList -> {
                 contactAdapter.setList(contactList);
             });
