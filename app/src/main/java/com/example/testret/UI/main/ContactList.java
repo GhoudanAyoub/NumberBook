@@ -58,25 +58,11 @@ public class ContactList extends AppCompatActivity {
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            findViewById(R.id.FindPhoneButton).setVisibility(View.GONE);
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (TextUtils.isEmpty(s)) {
-                editText.setError(getString(R.string.PhoneRequire));
-                findViewById(R.id.FindPhoneButton).setVisibility(View.GONE);
-            } else {
-                editText.setError(null);
-               // findViewById(R.id.FindPhoneButton).setVisibility(View.VISIBLE);
-            }
-            if (s.length() < 9) {
-                editText.setError(getString(R.string.putYourPhoneNumber));
-                //findViewById(R.id.FindPhoneButton).setVisibility(View.GONE);
-            } else {
-                editText.setError(null);
-                findViewById(R.id.FindPhoneButton).setVisibility(View.VISIBLE);
-            }
+            findViewById(R.id.FindPhoneButton).setVisibility(View.VISIBLE);
         }
     }
     private ContactViewModel contactViewModel;
@@ -146,11 +132,13 @@ public class ContactList extends AppCompatActivity {
         countryCodePicker = findViewById(R.id.ccp);
         editText = findViewById(R.id.phoneText);
         contactAdapter = new ContactAdapter(getApplicationContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(contactAdapter);
+        editText.addTextChangedListener(new addListenerOnTextChange(getApplicationContext(),editText));
+        findViewById(R.id.FindPhoneButton).setVisibility(View.GONE);
         findViewById(R.id.FindPhoneButton).setOnClickListener(view -> {
             phone = "+" + countryCodePicker.getSelectedCountryCode() + editText.getText().toString();
-            contactViewModel.getContactByPhoneNumber(phone);
+            contactViewModel.getContact();
             contactViewModel.getLiveData().observe(this, contactList -> {
                 contactAdapter.setList(contactList);
             });
