@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Number BOOK</string>
+    <string name="Now">Now</string>
+    <string name="PhoneRequire">Put Your Phone Number</string>
+    <string name="putYourPhoneNumber">Phone Number is only 9 Characters</string>
+    <string name="ActivateGpsRequest">"Please Activate Your Gps To Get Your Current Weather"</string>
+    <string name="okay">Okay</string>
+    <string name="AdMobApplicationId">ca-app-pub-8004564561830355~4377396962</string>
+    <string name="adMobBannerId">ca-app-pub-8004564561830355/8576496424</string>
+</resources>
